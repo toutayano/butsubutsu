@@ -1,0 +1,65 @@
+<h1 class="trades-title">投稿編集</h1>
+
+<div class="new-trade-form-wrapper">
+  <% if @trade.errors.any? %>
+    <div class="error-messages">
+      <h4><%= t('errors_title', count: @trade.errors.count) %></h4>
+      <ul>
+        <% @trade.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_for @trade do |f| %>
+    <div class="field">
+      <%= f.label :商品名 %>
+      <%= f.text_field :name, size: 30 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :カテゴリー  %>
+      <%= f.select :category, 
+        [["本・雑誌・漫画", "本・雑誌・漫画"], 
+        ["ゲーム・おもちゃ・グッズ", "ゲーム・おもちゃ・グッズ"], 
+        ["ファッション", "ファッション"],
+        ["家具・インテリア", "家具・インテリア"],
+        ["コスメ・美容", "コスメ・美容"],
+        ["アウトドア・釣り・旅行用品", "アウトドア・釣り・旅行用品"],
+        ["ダイエット・健康", "ダイエット・健康"],
+        ["食品・飲料・酒", "食品・飲料・酒"],
+        ["スポーツ", "スポーツ"],
+        ["ハンドメイド・手芸", "ハンドメイド・手芸"],
+        ["キッチン・日用品", "キッチン・日用品"],
+        ["ホビー・楽器・アート", "ホビー・楽器・アート"],
+        ["その他"]], include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :商品の状態 %>
+      <%= f.select :condition, 
+        [["新品、未使用", "新品、未使用"], 
+        ["未使用に近い", "未使用に近い"], 
+        ["目立った傷や汚れなし", "目立った傷や汚れなし"],
+        ["やや傷や汚れあり", "やや傷や汚れあり"],
+        ["傷や汚れあり", "傷や汚れあり"]], include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :商品の説明 %>
+      <%= f.text_area :detail, size: "30x2" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :商品画像 %>
+      <% if @trade.image.attached? %>
+        <p>現在の画像:</p>
+        <%= image_tag @trade.image, width: 200 %>
+      <% end %>
+      <%= f.file_field :image %>
+    </div>
+
+    <%= f.submit "更新する" %>
+  <% end %>
+</div>

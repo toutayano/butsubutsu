@@ -1,0 +1,28 @@
+<h1 class="trades-title">通知一覧</h1>
+
+<% if @notifications.any? %>
+  <ul class="notifications-list">
+    <% @notifications.each do |notification| %>
+      <li class="notification-item">
+        <% case notification.action %>
+        <% when "like" %>
+          <%= link_to "#{notification.actor.nickname}さんがあなたの投稿にいいねしました", trade_path(notification.trade) %>
+        <% when "match" %>
+          <% if notification.room.present? %>
+            <%= link_to "#{notification.actor.nickname}さんとマッチングしました！DMを送る", room_path(notification.room) %>
+          <% else %>
+            <%= "#{notification.actor.nickname}さんとマッチングしました！DM画面は未作成です" %>
+          <% end %>
+        <% when "message" %>
+          <% message = notification.message %>
+          <% if message.trade_id.present? %>
+            <%= link_to "#{message.user.nickname}さんからメッセージが届きました", trade_path(message.trade_id) %>
+          <% end %>
+        <% end %> <%# case の end %>
+        <span class="notification-date"><%= notification.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>通知はまだありません。</p>
+<% end %>

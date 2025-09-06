@@ -1,0 +1,51 @@
+<!-- 投稿一覧タイトル -->
+<h2 class="trades-title">投稿一覧</h2>
+
+<!-- 投稿一覧グリッド -->
+<div class="trades-container" data-controller="card-click">
+  <% @trades.each do |t| %>
+    <div class="trade-card" data-href="<%= trade_path(t) %>">
+
+      <!-- 投稿者アイコンと商品画像を横並び -->
+      <div class="card-top" style="display: flex; align-items: center; gap: 10px;">
+
+        <!-- 投稿者アイコン -->
+        <div class="author-info">
+          <%= link_to user_path(t.user), class: "profile-icon" do %>
+            <% if t.user.avatar.attached? %>
+              <%= image_tag t.user.avatar, class: "author-avatar" %>
+            <% else %>
+              <%= image_tag "default_avatar.png", class: "author-avatar" %>
+            <% end %>
+          <% end %>
+          <span class="author-nickname"><%= t.user.nickname %></span>
+        </div>
+
+        <!-- 商品画像 -->
+        <% if t.image.attached? %>
+          <%= image_tag t.image, class: "trade-image-right" %>
+        <% end %>
+      </div>
+
+      <!-- 投稿情報 -->
+      <div class="trade-info">
+        <h3><%= t.name %></h3>
+        <p>カテゴリー: <%= t.category %></p>
+      </div>
+
+      <!-- いいねボタン -->
+      <div class="like-section">
+        <% if user_signed_in? %>
+          <% like = t.likes.find_by(user: current_user) %>
+          <% if like %>
+            <%= button_to "いいねを取り消す", trade_like_path(t, like), method: :delete, class: "like-button" %>
+          <% else %>
+            <%= button_to "いいね", trade_likes_path(t), method: :post, class: "like-button" %>
+          <% end %>
+        <% end %>
+        <span class="like-count"><%= t.likes.count %> いいね</span>
+      </div>
+
+    </div>
+  <% end %>
+</div>

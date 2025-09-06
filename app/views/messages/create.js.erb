@@ -1,0 +1,11 @@
+// 新しいメッセージをコメント欄に追加
+$(".messages-container").append(`
+  <div class="message own-message">
+    <strong><%= j @message.user.nickname %>:</strong>
+    <%= j @message.content %>
+    <span class="message-date"><%= @message.created_at.strftime("%H:%M") %></span>
+  </div>
+`);
+
+// テキストエリアを空にする
+$("textarea").val("");

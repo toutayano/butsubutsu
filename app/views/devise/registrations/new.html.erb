@@ -1,0 +1,73 @@
+<h2>新規登録</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <!-- メールアドレス -->
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <!-- パスワード -->
+  <div class="field">
+    <%= f.label :パスワード %>
+    <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <!-- パスワード確認 -->
+  <div class="field">
+    <%= f.label :パスワード確認 %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <!-- 追加項目: 性別 -->
+  <div class="field">
+    <%= f.label :gender, "性別" %><br />
+    <%= f.select :gender, ["男性", "女性", "それ以外"], prompt: "選択してください" %>
+  </div>
+
+  <!-- 追加項目: 大学 -->
+  <div class="field">
+    <%= f.label :university, "大学" %><br />
+    <%= f.text_field :university, placeholder: "法政大学" %>
+  </div>
+
+  <!-- 追加項目: 学年 -->
+  <div class="field">
+    <%= f.label :grade, "学年" %><br />
+    <%= f.select :grade, ["1年", "2年", "3年", "4年", "M1年", "M2年", "D1年", "D2年", "D3年" ], prompt: "選択してください" %>
+  </div>
+
+  <!-- 学部 -->
+  <div class="field">
+    <%= f.label :faculty, "学部" %><br />
+    <%= f.text_field :faculty, placeholder: "経済学部" %>
+  </div>
+
+  <!-- 学科 -->
+  <div class="field">
+    <%= f.label :department, "学科" %><br />
+    <%= f.text_field :department, placeholder: "経済学科" %>
+  </div>
+
+  <div class="field">
+  <%= f.label :nickname, "ニックネーム" %><br />
+  <%= f.text_field :nickname, placeholder: "たくぽん" %>
+  </div>
+
+  <div class="field">
+  <%= f.label :avatar, "プロフィール画像" %><br />
+  <%= f.file_field :avatar, accept: "image/*" %>
+  </div>
+
+  <!-- 登録ボタン -->
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

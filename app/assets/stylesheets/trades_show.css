@@ -1,0 +1,61 @@
+/* --- 投稿詳細専用コメントスタイル --- */
+.messages-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+.message {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.message.own-message {
+  background-color: #d1e7dd;
+  text-align: right;
+}
+
+.message strong {
+  display: block;
+  font-weight: bold;
+}
+
+.message-date {
+  font-size: 0.75rem;
+  color: #888;
+  margin-left: 5px;
+}
+
+.message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.message-form textarea {
+  resize: none;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.message-form input[type="submit"] {
+  align-self: flex-end;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.message-form input[type="submit"]:hover {
+  background-color: #357ab8;
+}

@@ -1,0 +1,123 @@
+.page-title {
+  text-align: center;   /* 中央寄せ */
+  font-weight: bold;    /* 太字 */
+  font-size: 24px;      /* h1 と h2 同じサイズ */
+  margin: 20px 0;       /* 上下余白 */
+  color: #333;          /* 文字色 */
+}
+
+/* ====== ログイン全体の箱 ====== */
+.trade-wrapper {
+  max-width: 500px; /* 横幅を広げる */
+  min-height: 500px; /* 縦幅を確保 */
+  margin: 50px auto; /* 画面中央寄せ */
+  padding: 30px 20px;
+  background-color: #fff; /* 背景 */
+  border-radius: 10px; /* 角丸 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
+  display: flex;
+  flex-direction: column; /* 中身を縦に並べる */
+  justify-content: space-between; /* フォームとリンクを上下に分ける */
+}
+
+/* ====== タイトル ====== */
+.trade-wrapper h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ====== フォーム本体 ====== */
+.trade-wrapper form {
+  display: block; /* 強制縦並び */
+  width: 100%;
+}
+
+/* 各入力項目 */
+.trade-wrapper .field {
+  width: 100%;
+  margin-bottom: 20px; /* 項目間スペース */
+}
+
+.trade-wrapper .field label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.trade-wrapper input[type="text"],
+.trade-wrapper input[type="email"],
+.trade-wrapper input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.trade-wrapper input[type="text"]:focus,
+.trade-wrapper input[type="email"]:focus,
+.trade-wrapper input[type="password"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* ====== チェックボックス ====== */
+.trade-wrapper .checkbox-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.trade-wrapper .checkbox-field label {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ====== 送信ボタン ====== */
+.trade-wrapper .actions {
+  margin-top: 10px;
+}
+
+.trade-wrapper .actions input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.trade-wrapper .actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ====== 下部リンク ====== */
+.login-links {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.login-links a {
+  display: block; /* 縦に並べる */
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}

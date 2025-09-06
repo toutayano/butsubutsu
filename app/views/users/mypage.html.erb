@@ -1,0 +1,79 @@
+<h1 class="page-title">プロフィール</h1>
+
+<!-- プロフィールカード -->
+<div class="profile-card">
+  <!-- プロフィール画像 -->
+  <% if current_user.avatar.attached? %>
+    <%= image_tag current_user.avatar, class: "profile-avatar" %>
+  <% else %>
+    <%= image_tag "default_avatar.png", class: "profile-avatar" %> <!-- デフォルト画像 -->
+  <% end %>
+
+  <!-- ユーザー情報 -->
+  <div class="profile-info">
+    <p><strong>ニックネーム:</strong> <%= current_user.nickname %></p>
+    <p><strong>大学:</strong> <%= current_user.university %></p>
+    <p><strong>学部:</strong> <%= current_user.faculty %></p>
+    <p><strong>学科:</strong> <%= current_user.department %></p>
+    <p><strong>学年:</strong> <%= current_user.grade %></p>
+    <p><strong>性別:</strong> <%= current_user.gender %></p>
+  </div>
+
+  <!-- 編集ボタン -->
+  <div class="edit-button-container">
+    <%= link_to "プロフィールを編集", edit_profile_path, class: "edit-profile-button" %>
+  </div>
+</div>
+  
+
+
+
+<h2 class="page-title">自分の投稿</h2>
+<div class="trades-container" data-controller="card-click">
+  <% @my_trades.each do |t| %>
+    <div class="trade-card" data-href="<%= trade_path(t) %>">
+      
+      <% if t.image.attached? %>
+        <%= image_tag t.image, size: '250x200', class: "trade-image" %>
+      <% end %>
+
+      <div class="trade-info">
+        <h3><%= t.name %></h3>
+        <p>カテゴリー: <%= t.category %></p>
+        <span>いいね数: <%= t.likes.count %></span>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<h2 class="page-title">いいねした投稿</h2>
+<div class="trades-container" data-controller="card-click">
+  <% @liked_trades.each do |t| %>
+    <div class="trade-card" data-href="<%= trade_path(t) %>">
+
+      <!-- 投稿者アイコン -->
+      <div class="author-info">
+        <%= link_to user_path(t.user), class: "profile-icon" do %>
+          <% if t.user.avatar.attached? %>
+            <%= image_tag t.user.avatar, class: "author-avatar" %>
+          <% else %>
+            <%= image_tag "default_avatar.png", class: "author-avatar" %>
+          <% end %>
+        <% end %>
+        <span class="author-nickname"><%= t.user.nickname %></span>
+      </div>
+
+      <!-- 商品画像 -->
+      <% if t.image.attached? %>
+        <%= image_tag t.image, size: '250x200', class: "trade-image" %>
+      <% end %>
+
+      <!-- 投稿情報 -->
+      <div class="trade-info">
+        <h3><%= t.name %></h3>
+        <p>カテゴリー: <%= t.category %></p>
+        <span>いいね数: <%= t.likes.count %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,62 @@
+<h1 class="page-title">投稿詳細</h1>
+
+<div class="trade-wrapper">
+  <div class="trade-card">
+    <% if @trade.image.attached? %>
+      <div class="trade-image">
+        <%= image_tag @trade.image, width: 300 %>
+      </div>
+    <% end %>
+
+    <div class="trade-content">
+      <p><strong>名前:</strong> <%= @trade.name %></p>
+      <p><strong>カテゴリ:</strong> <%= @trade.category %></p>
+      <p><strong>状態:</strong> <%= @trade.condition %></p>
+
+      <div class="trade-detail">
+        <strong>詳細:</strong>
+        <p><%= simple_format(@trade.detail) %></p>
+      </div>
+
+      <p><strong>いいね数:</strong> <%= @trade.likes.count %></p>
+      <p><strong>作成日:</strong> <%= @trade.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+
+      <% if user_signed_in? && current_user == @trade.user %>
+        <div class="trade-actions">
+          <%= link_to "編集", edit_trade_path(@trade), class: "edit-button" %>
+          <%= button_to "削除", trade_path(@trade), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "delete-button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<h2 class="page-title">メッセージ</h2>
+
+<div class="messages-container">
+  <% @messages.each do |message| %>
+    <div class="message <%= 'own-message' if message.user_id == current_user&.id %>">
+      <strong><%= message.user.nickname %>:</strong>
+      <%= message.content %>
+      <span class="message-date"><%= message.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+
+      <% if user_signed_in? && message.user_id == current_user.id %>
+        <%= button_to "削除", trade_message_path(@trade, message), method: :delete, data: { confirm: "削除しますか？" } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <div class="message-form">
+    <%= form_with(model: [@trade, Message.new], local: true) do |f| %>
+      <%= f.hidden_field :trade_id, value: @trade.id %>
+      <%= f.text_area :content, rows: 3, placeholder: "メッセージを入力..." %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+<% else %>
+  <p>メッセージを送るにはログインしてください。</p>
+<% end %>

@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      trade: "投稿"
+    attributes:
+      trade:
+        name: "商品名"
+        category: "カテゴリー"
+        condition: "商品の状態"
+        detail: "商品の説明"
+        image: "商品画像"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: "を入力してください"
+
+  # エラーメッセージのタイトル
+  errors_title:
+    one: "%{count} 件のエラーがあります"
+    other: "%{count} 件のエラーがあります"

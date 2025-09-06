@@ -1,0 +1,19 @@
+<h1 class="page-title">DMルーム</h1>
+
+<div class="messages-container">
+  <% @messages.each do |message| %>
+    <div class="message <%= 'own-message' if message.user_id == current_user.id %>">
+      <strong><%= message.user.nickname %>:</strong>
+      <%= message.content %>
+      <span class="message-date"><%= message.created_at.strftime("%H:%M") %></span>
+    </div>
+  <% end %>
+</div>
+
+<div class="message-form">
+  <%= form_with(model: @message, local: true) do |f| %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.text_area :content, rows: 3, placeholder: "メッセージを入力..." %>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>

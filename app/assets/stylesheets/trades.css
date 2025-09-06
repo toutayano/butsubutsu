@@ -1,0 +1,247 @@
+/* 親コンテナ：3列グリッド配置（端はぴったりくっつける） */
+.trades-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 均等3列 */
+  gap: 16px; /* カード間だけ間隔を確保 */
+  width: 100%; /* 横幅いっぱい */
+  margin: 0; /* 左右余白なし */
+  padding: 0; /* 左右余白なし */
+}
+
+/* 各カード */
+.trade-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* ホバー時 */
+.trade-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+/* 上部構成 */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 商品情報 */
+.trade-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.trade-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.trade-category {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0 0;
+}
+
+/* 商品画像 */
+.trade-image-wrapper {
+  text-align: center;
+  margin: 12px 0;
+}
+
+.trade-image {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+/* いいね関連 */
+.like-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* 常に表示されるいいねボタン */
+.like-button {
+  opacity: 1; /* 初期から常に表示 */
+  padding: 6px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s; /* hover時に色だけ変化 */
+}
+
+/* hover時に色を濃くする */
+.like-button:hover {
+  background-color: #0056b3;
+}
+
+/* いいね数 */
+.like-count {
+  font-size: 14px;
+  color: #333;
+}
+
+/* 投稿一覧タイトル */
+.trades-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* レスポンシブ */
+@media (max-width: 900px) {
+  .trades-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .trades-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ページ全体で中央寄せ */
+.trade-wrapper {
+  display: flex;
+  justify-content: center; /* 水平方向の中央 */
+  align-items: center;     /* 垂直方向の中央 */
+  min-height: 100vh;       /* 画面の高さ全体を使う */
+  background-color: #f0f2f5; /* 背景に薄いグレーをつけるとカードが映える */
+}
+
+.trade-card {
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+/* 詳細文が長い場合にスクロール可能に */
+.trade-detail {
+  margin: 15px 0;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.trade-detail p {
+  margin: 5px 0;
+  white-space: pre-wrap;
+}
+
+.trade-image {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.trade-image img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* エラーメッセージ */
+.error-messages {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.error-messages h4 {
+  color: #d9534f;
+  margin: 0 0 5px 0;
+}
+
+/* 新規投稿タイトル */
+.new-trade-title {
+  text-align: center;    /* 中央寄せ */
+  font-size: 24px;       /* h2 より少し小さめ */
+  font-weight: bold;     /* 太字 */
+  margin: 20px 0;        /* 上下の余白 */
+  color: #333;           /* 好きな色に変更可能 */
+}
+
+/* フォーム全体を中央寄せ */
+.new-trade-form-wrapper {
+  max-width: 500px;          /* フォーム幅を制限 */
+  margin: 0 auto;            /* 水平方向中央寄せ */
+  padding: 20px;
+  background-color: #fff;    /* 背景色（任意） */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* フォームタイトル */
+.new-trade-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 各項目の間隔 */
+.new-trade-form-wrapper .field {
+  margin-bottom: 15px; /* 項目間のスペース */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 入力欄 */
+.new-trade-form-wrapper input[type="text"],
+.new-trade-form-wrapper select,
+.new-trade-form-wrapper textarea,
+.new-trade-form-wrapper input[type="file"] {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* 送信ボタン */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}

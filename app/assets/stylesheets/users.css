@@ -1,0 +1,261 @@
+/* プロフィールカード */
+.profile-card {
+  position: relative; /* 編集ボタンの基準 */
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  padding-bottom: 60px; /* 編集ボタン分の余白を確保 */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info p {
+  margin: 5px 0;
+}
+
+/* 編集ボタン */
+.edit-button-container {
+  position: absolute;
+  bottom: 15px; /* 下から15px */
+  right: 15px;  /* 右から15px */
+}
+
+.edit-profile-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-profile-button:hover {
+  background-color: #0056b3;
+}
+
+/* 個別カード */
+.trade-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 投稿者情報 + 商品画像横並び */
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* アイコンと商品画像の間隔 */
+}
+
+/* 投稿者アイコン */
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* アイコンとニックネームの間隔 */
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* 丸型 */
+  object-fit: cover;
+  cursor: pointer; /* クリック可能感を出す */
+}
+
+.author-nickname {
+  font-weight: bold;
+}
+
+/* 商品画像 */
+.trade-image-right {
+  width: 100px;  /* アイコンの右に表示するサイズ */
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* 投稿情報 */
+.trade-info h3 {
+  margin: 10px 0 5px;
+}
+
+.like-button {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 2px 6px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.like-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.like-count {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* 投稿一覧タイトル */
+.trades-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* レスポンシブ */
+@media (max-width: 900px) {
+  .trades-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .trades-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ページタイトル（h1, h2 共通） */
+.page-title {
+  text-align: center;   /* 中央寄せ */
+  font-weight: bold;    /* 太字 */
+  font-size: 24px;      /* h1 と h2 同じサイズ */
+  margin: 20px 0;       /* 上下余白 */
+  color: #333;          /* 文字色 */
+}
+
+/* ====== 新規登録フォーム全体 ====== */
+.registration-wrapper {
+  max-width: 500px;      /* 横幅を広げる */
+  min-height: 600px;     /* 縦幅を確保 */
+  margin: 50px auto;     /* 画面中央寄せ */
+  padding: 30px 20px;
+  background-color: #fff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; /* フォームと下部リンクを上下に分ける */
+}
+
+/* ====== フォーム ====== */
+.registration-wrapper form {
+  display: block; 
+  width: 100%;
+}
+
+/* 各入力項目 */
+.registration-wrapper .field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.registration-wrapper .field label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.registration-wrapper input[type="text"],
+.registration-wrapper input[type="email"],
+.registration-wrapper input[type="password"],
+.registration-wrapper select,
+.registration-wrapper textarea,
+.registration-wrapper input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.registration-wrapper input:focus,
+.registration-wrapper select:focus,
+.registration-wrapper textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* ====== チェックボックス ====== */
+.registration-wrapper .checkbox-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.registration-wrapper .checkbox-field label {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ====== 登録ボタン ====== */
+.registration-wrapper .actions {
+  margin-top: 10px;
+}
+
+.registration-wrapper .actions input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.registration-wrapper .actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ====== 下部リンク ====== */
+.registration-wrapper .login-links {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.registration-wrapper .login-links a {
+  display: block; 
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.registration-wrapper .login-links a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,71 @@
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 20px 0;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* 丸型 */
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.trades-container {
+  display: flex;
+  flex-wrap: wrap; /* カードを複数行に並べる */
+  gap: 20px;       /* カード間の隙間 */
+  margin-top: 20px;
+}
+
+.trade-card {
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  background-color: #fff;
+}
+
+.trade-card:hover {
+  transform: translateY(-5px); /* マウスオーバーで少し浮かせる */
+}
+
+.trade-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.trade-info {
+  padding: 10px;
+}
+
+.trade-info h3 {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+}
+
+.trade-info p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+}
+
+.trade-info span {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+}

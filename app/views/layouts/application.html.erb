@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Butsubutsu</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+<header class="site-header">
+  <div class="header-left">
+    <h1>ぶつぶつカレッジ</h1>
+  </div>
+
+  <% if controller_name == "trades" && action_name == "index" %>
+    <!-- 一覧ページのみ表示 -->
+    <nav class="navbar">
+      <%= link_to "マイページ", mypage_path, class: "nav-btn" %>
+      <%= link_to "新規投稿", new_trade_path, class: "nav-btn" %>
+      <%= link_to "通知", notifications_path, class: "nav-btn" %>
+      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-btn" %>
+    </nav>
+  <% else %>
+   <!-- 他ページ用 -->
+<% unless devise_controller? %>
+  <nav class="navbar">
+    <%= link_to "一覧ページに戻る", trades_path, class: "nav-btn" %>
+
+    <% if (controller_name == "rooms" && action_name == "show") || 
+          (controller_name == "trades" && action_name == "show") %>
+      <%= link_to "通知一覧に戻る", notifications_path, class: "nav-btn" %>
+    <% end %>
+
+    <% if controller_name == "trades" && action_name == "edit" %>
+      <%= link_to "詳細に戻る", trade_path(@trade), class: "nav-btn" %>
+    <% end %>
+
+    <% if controller_name == "users" && action_name == "edit_profile" %>
+      <%= link_to "マイページに戻る", mypage_path, class: "nav-btn" %>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-btn" %>
+    <% end %>
+  </nav>
+ <% end %>
+<% end %>
+</header>
+
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>

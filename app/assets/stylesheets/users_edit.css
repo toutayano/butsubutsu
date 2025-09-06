@@ -1,0 +1,68 @@
+/* フォームタイトル（h2） */
+.profile-edit-title {
+  text-align: center;       /* 中央寄せ */
+  font-size: 24px;          /* h1/h2 と同じサイズ */
+  font-weight: bold;        /* 太字 */
+  margin: 20px 0;           /* 上下の余白 */
+  color: #333;              /* 文字色 */
+}
+
+/* フォーム全体を中央寄せ */
+.profile-edit-form-wrapper {
+  max-width: 500px;          /* フォーム幅制限 */
+  margin: 0 auto;            /* 水平方向中央寄せ */
+  padding: 20px;
+  background-color: #fff;     /* 背景色 */
+  border-radius: 10px;        /* 角丸 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 軽い影 */
+}
+
+/* 各入力フィールド */
+.profile-edit-form-wrapper .field {
+  margin-bottom: 15px;       /* フィールド間のスペース */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 入力欄 */
+.profile-edit-form-wrapper input[type="text"],
+.profile-edit-form-wrapper select,
+.profile-edit-form-wrapper textarea,
+.profile-edit-form-wrapper input[type="file"] {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* 送信ボタン */
+.profile-edit-form-wrapper .submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.profile-edit-form-wrapper .submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* エラー表示 */
+.profile-edit-form-wrapper .error-messages {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.profile-edit-form-wrapper .error-messages h4 {
+  color: #d9534f;
+  margin: 0 0 5px 0;
+}

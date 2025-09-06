@@ -1,0 +1,40 @@
+.messages-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  background-color: #eaeaea;
+}
+
+.own-message {
+  background-color: #cce5ff;
+}
+
+.message-date {
+  font-size: 0.7em;
+  color: gray;
+  margin-left: 5px;
+}
+
+.message-form textarea {
+  width: 100%;
+  resize: none;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.page-title {
+  text-align: center;   /* 中央寄せ */
+  font-weight: bold;    /* 太字 */
+  font-size: 24px;      /* h1 と h2 同じサイズ */
+  margin: 20px 0;       /* 上下余白 */
+  color: #333;          /* 文字色 */
+}

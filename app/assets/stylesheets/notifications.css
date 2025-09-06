@@ -1,0 +1,27 @@
+.notifications-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.notification-date {
+  display: block;
+  font-size: 0.8em;
+  color: gray;
+  margin-top: 5px;
+}
+
+/* 投稿一覧タイトル・通知一覧タイトル */
+.trades-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
