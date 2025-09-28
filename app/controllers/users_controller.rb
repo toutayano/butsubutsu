@@ -18,6 +18,8 @@ class UsersController < ApplicationController
   # 空配列でも初期化しておく
     @my_trades = @user.trades.order(created_at: :desc) || []
     @liked_trades = @user.liked_trades.order(created_at: :desc) || []
+
+    session.delete(:from_mypage)
   end
 
   # プロフィール編集画面

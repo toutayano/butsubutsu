@@ -1,0 +1,276 @@
+/* ===== プロフィールカード ===== */
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  background: #FFFFFF; /* 背景色 */
+  border-radius: 14px; /* 適度な角丸 */
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+
+  width: 100%;         /* 画面幅の95% */
+  max-width: 700px;   /* 最大700pxまで広げる */
+  gap: 20px;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;     /* 中央寄せ */
+}
+
+.profile-slider,
+.profile-slider-container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: flex-end; /* ボタンを右寄せ */
+  margin-top: 20px;          /* ボタンと情報部分の間 */
+  margin-right: 20px;        /* 右側の余白 */
+  margin-bottom: 20px;       /* カード下部との余白 */
+}
+
+
+/* 左側アイコン */
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+  flex-shrink: 0;
+}
+
+/* 右側プロフィール情報 */
+.profile-info-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  position: relative;
+}
+
+/* 2列×3行のグリッド */
+.profile-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  gap: 8px 20px;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* 編集ボタン */
+.edit-button-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.edit-profile-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.edit-profile-button:hover {
+  background-color: #0056b3;
+}
+
+/* ===== スマホ用 ===== */
+@media (max-width: 480px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    width: 95%;          /* スマホでは少し余白を持たせる */
+    max-width: none;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+
+  .profile-info-container {
+    width: 100%;
+    position: relative;
+  }
+
+  .profile-info {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    text-align: center;
+  }
+
+  .edit-button-container {
+    position: static;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .edit-profile-button {
+    width: 100%;
+  }
+}
+
+.trades-container {
+  display: flex;
+  flex-wrap: wrap; /* カードを複数行に並べる */
+  gap: 20px;       /* カード間の隙間 */
+  margin-top: 20px;
+  justify-content: space-between; /* 均等配置に変更 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.trade-card {
+  width: 370px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  background-color: #fff;
+  flex-shrink: 0;
+  margin: 0;       /* 追加: 上下左右の外余白をゼロ */
+  padding: 0;      /* 追加: 内余白をゼロ */
+}
+
+.trade-card:hover {
+  transform: translateY(-5px); /* マウスオーバーで少し浮かせる */
+}
+
+
+
+.trade-info {
+  padding: 5px;
+}
+
+.trade-info h3 {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+}
+
+
+
+.trade-info span {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/* ===== 投稿画像（正方形で表示） ===== */
+.trade-image {
+  width: 370px;
+  height: 370px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background-color: #f5f5f5;
+  margin: 0 auto; /* 中央揃え */
+  margin: 0; /* 修正: 余白を完全ゼロに */
+  padding: 0; /* 念のため追加 */
+}
+
+/* ===== アイコン + 商品名 横並び ===== */
+.author-and-name {
+  display: flex;
+  align-items: center; /* アイコンと商品名を中央揃え */
+  gap: 8px;            /* アイコンと商品名の間隔を少し詰める */
+  padding: 0;          /* 余白をなくす */
+  margin: 4px 0 4px 0; /* 上下の間隔を最小限に */
+}
+
+/* アイコンのサイズ */
+.author-avatar {
+  width: 48px;     /* 少しコンパクトに */
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* 商品名 */
+.trade-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;           /* デフォルト余白を削除 */
+  line-height: 1.2;    /* 行間をコンパクトに */
+}
+
+/* ===== いいね数 + ボタン横並び ===== */
+.like-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;         /* いいね数とボタンの間隔を少し狭く */
+  margin-top: 4px;  /* 商品名との上下間隔を小さく */
+  margin-bottom: 8px; /* 下線との間隔（ここを追加） */
+}
+
+/* ===== いいね数 共通スタイル ===== */
+.like-count {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 4px;
+}
+
+.trade-image-wrapper {
+  margin: 0;
+  padding: 0;
+  display: block;
+  line-height: 0; /* 画像上下の隙間対策 */
+}
+
+.like-button {
+  background-color: #f8d7da; /* 薄い赤 */
+  color: #721c24;           /* 濃い赤系テキスト */
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  text-align: center;
+}
+
+.like-button:hover {
+  background-color: #f5c6cb; /* 少し濃い赤に */
+  border-color: #f1b0b7;
+}
+
+.like-button:active {
+  background-color: #f1b0b7; /* 押下時にさらに濃い赤 */
+  border-color: #e89ca2;
+}
+
+/* プロフィールカード共通フォント */
+.profile-card,
+.profile-card p,
+.profile-card h1,
+.profile-card h2,
+.profile-card h3,
+.profile-card h4,
+.profile-card span,
+.profile-card label {
+  font-family: "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Yu Gothic", "YuGothic", sans-serif;
+  color: #333; /* 文字色も統一 */
+}
+

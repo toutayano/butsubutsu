@@ -1,6 +1,6 @@
 <h2 class="page-title">プロフィール編集</h2>
 
-<div class="new-trade-form-wrapper">
+<div class="profile-edit-wrapper">
 
   <% if @user.errors.any? %>
     <div class="error-messages">
@@ -13,49 +13,45 @@
     </div>
   <% end %>
 
-  
-
   <%= form_for(@user, url: update_profile_path, html: { method: :put }) do |f| %>
     
     <div class="field">
-      <%= f.label :gender, "性別" %><br />
+      <%= f.label :gender, "性別" %>
       <%= f.select :gender, ["男性","女性","それ以外"], prompt: "選択してください" %>
     </div>
 
     <div class="field">
-      <%= f.label :university, "大学" %><br />
+      <%= f.label :university, "大学" %>
       <%= f.text_field :university %>
     </div>
 
     <div class="field">
-      <%= f.label :grade, "学年" %><br />
+      <%= f.label :grade, "学年" %>
       <%= f.select :grade, ["1年","2年","3年","4年","M1年","M2年","D1年","D2年","D3年"], prompt: "選択してください" %>
     </div>
 
     <div class="field">
-      <%= f.label :faculty, "学部" %><br />
+      <%= f.label :faculty, "学部" %>
       <%= f.text_field :faculty %>
     </div>
 
     <div class="field">
-      <%= f.label :department, "学科" %><br />
+      <%= f.label :department, "学科" %>
       <%= f.text_field :department %>
     </div>
 
     <div class="field">
-      <%= f.label :nickname, "ニックネーム" %><br />
+      <%= f.label :nickname, "ニックネーム" %>
       <%= f.text_field :nickname %>
     </div>
 
     <div class="field">
-      <%= f.label :avatar, "プロフィール画像" %><br />
+      <%= f.label :avatar, "プロフィール画像" %>
       <%= f.file_field :avatar, accept: "image/*" %>
     </div>
 
     <div class="actions">
       <%= f.submit "更新する", class: "submit-btn" %>
     </div>
-
   <% end %>
 </div>
-

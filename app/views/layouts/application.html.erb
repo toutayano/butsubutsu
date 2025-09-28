@@ -16,39 +16,64 @@
     <h1>ぶつぶつカレッジ</h1>
   </div>
 
-  <% if controller_name == "trades" && action_name == "index" %>
-    <!-- 一覧ページのみ表示 -->
+  <% unless devise_controller? %>
     <nav class="navbar">
-      <%= link_to "マイページ", mypage_path, class: "nav-btn" %>
-      <%= link_to "新規投稿", new_trade_path, class: "nav-btn" %>
-      <%= link_to "通知", notifications_path, class: "nav-btn" %>
-      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-btn" %>
+
+      <%# ===== 一覧ページの場合 ===== %>
+      <% if controller_name == "trades" && action_name == "index" %>
+        <%= link_to "マイページ", mypage_path, class: "nav-btn" %>
+        <%= link_to "新規投稿", new_trade_path, class: "nav-btn" %>
+        <%= link_to "通知", notifications_path, class: "nav-btn" %>
+      <% end %>
+
+      <%# ===== 投稿詳細ページの場合 ===== %>
+      <% if controller_name == "trades" && action_name == "show" %>
+        <% if request.referer&.include?(notifications_path) %>
+         <%= link_to "通知一覧に戻る", notifications_path, class: "nav-btn" %>
+        <% elsif session[:from_mypage] %>
+         <%= link_to "マイページに戻る", mypage_path, class: "nav-btn" %>
+        <% else %>
+         <%= link_to "一覧ページに戻る", trades_path, class: "nav-btn" %>
+        <% end %>
+      <% end %>
+
+      <%# ===== 相手プロフィールページの場合 ===== %>
+      <% if controller_name == "users" && action_name == "show" %>
+        <% if request.referer&.include?(mypage_path) %>
+          <%# マイページから相手プロフィールへ来た場合 %>
+          <%= link_to "マイページに戻る", mypage_path, class: "nav-btn" %>
+        <% else %>
+          <%# それ以外（一覧ページなど） %>
+          <%= link_to "一覧ページに戻る", trades_path, class: "nav-btn" %>
+        <% end %>
+      <% end %>
+
+      <%# ===== その他のページで「一覧ページに戻る」を表示 ===== %>
+      <% if !(controller_name == "trades" && action_name == "show") &&
+            !(controller_name == "trades" && action_name == "index") &&
+            !(controller_name == "users" && action_name == "show") &&
+            !(controller_name == "trades" && action_name == "edit") &&        
+            !(controller_name == "users" && action_name == "edit_profile") %> 
+        <%= link_to "一覧ページに戻る", trades_path, class: "nav-btn" %>
+      <% end %>
+
+      <%# ===== 投稿編集ページ ===== %>
+      <% if controller_name == "trades" && action_name == "edit" %>
+        <%= link_to "投稿詳細に戻る", trade_path(@trade), class: "nav-btn" %>
+      <% end %>
+
+      <%# ===== プロフィール編集ページ ===== %>
+      <% if controller_name == "users" && action_name == "edit_profile" %>
+        <%= link_to "マイページに戻る", mypage_path, class: "nav-btn" %>
+      <% end %>
+
+      <%# ===== 共通ログアウトボタン ===== %>
+      <% if user_signed_in? %>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-btn" %>
+      <% end %>
+
     </nav>
-  <% else %>
-   <!-- 他ページ用 -->
-<% unless devise_controller? %>
-  <nav class="navbar">
-    <%= link_to "一覧ページに戻る", trades_path, class: "nav-btn" %>
-
-    <% if (controller_name == "rooms" && action_name == "show") || 
-          (controller_name == "trades" && action_name == "show") %>
-      <%= link_to "通知一覧に戻る", notifications_path, class: "nav-btn" %>
-    <% end %>
-
-    <% if controller_name == "trades" && action_name == "edit" %>
-      <%= link_to "詳細に戻る", trade_path(@trade), class: "nav-btn" %>
-    <% end %>
-
-    <% if controller_name == "users" && action_name == "edit_profile" %>
-      <%= link_to "マイページに戻る", mypage_path, class: "nav-btn" %>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-btn" %>
-    <% end %>
-  </nav>
- <% end %>
-<% end %>
+  <% end %>
 </header>
 
     <main>

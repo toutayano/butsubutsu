@@ -1,71 +1,66 @@
 <h1 class="page-title"><%= @user.nickname.presence || "未設定" %> さんのプロフィール</h1>
 
-<div class="profile-card">
-  <!-- プロフィール画像 -->
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, class: "profile-avatar" %>
-  <% else %>
-    <%= image_tag "default_avatar.png", class: "profile-avatar" %>
-  <% end %>
+<div class="profile-slider-container">
+  <div class="profile-slider">
+    
+    <div class="profile-card">
+      <% user = @user %>
 
-  <!-- ユーザー情報 -->
-  <div class="profile-info">
-    <p><strong>ニックネーム:</strong> <%= @user.nickname.presence || "未設定" %></p>
-    <p><strong>性別:</strong> <%= @user.gender.presence || "未設定" %></p>
-    <p><strong>大学:</strong> <%= @user.university.presence || "未設定" %></p>
-    <p><strong>学部:</strong> <%= @user.faculty.presence || "未設定" %></p>
-    <p><strong>学科:</strong> <%= @user.department.presence || "未設定" %></p>
-    <p><strong>学年:</strong> <%= @user.grade.presence || "未設定" %></p>
+      <% if user.avatar.attached? %>
+        <%= image_tag user.avatar, class: "profile-avatar" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", class: "profile-avatar" %>
+      <% end %>
+
+      <div class="profile-info">
+        <p><strong>ニックネーム:</strong> <%= user.nickname %></p>
+        <p><strong>学年:</strong> <%= user.grade %></p>
+        <p><strong>性別:</strong> <%= user.gender %></p>
+        <p><strong>学部:</strong> <%= user.faculty %></p>
+        <p><strong>大学:</strong> <%= user.university %></p>
+        <p><strong>学科:</strong> <%= user.department %></p>
+      </div>
+    </div>
+
+    
   </div>
 </div>
 
 <hr>
 
-<!-- 投稿一覧グリッド -->
-<div class="trades-container">
+<h1 class="page-title"><%= @user.nickname.presence || "未設定" %> さんの投稿一覧</h1>
+
+<div class="trades-container" data-controller="card-click">
   <% if @user_trades.any? %>
     <% @user_trades.each do |t| %>
-      <div class="trade-card">
+      <div class="trade-card" data-href="<%= trade_path(t) %>">
 
-        <!-- 投稿者アイコンと商品画像を横並び -->
-        <div class="card-top" style="display: flex; align-items: center; gap: 10px;">
-
-          <!-- 投稿者アイコン -->
-          <div class="author-info">
-            <%= link_to user_path(t.user) do %>
-              <% if t.user.avatar.attached? %>
-                <%= image_tag t.user.avatar, class: "author-avatar" %>
-              <% else %>
-                <%= image_tag "default_avatar.png", class: "author-avatar" %>
-              <% end %>
-            <% end %>
-            <span class="author-nickname"><%= t.user.nickname.presence || "未設定" %></span>
+        <!-- 商品画像（上部） -->
+        <% if t.image.attached? %>
+          <div class="trade-image-wrapper">
+            <%= image_tag t.image, class: "trade-image" %>
           </div>
+        <% else %>
+          <div class="trade-image-wrapper no-image">
+            <%= image_tag "no_image.png", class: "trade-image" %>
+          </div>
+        <% end %>
 
-          <!-- 商品画像 -->
-          <% if t.image.attached? %>
-            <%= image_tag t.image, class: "trade-image-right" %>
-          <% end %>
-        </div>
-
-        <!-- 投稿情報 -->
-        <div class="trade-info">
-          <h3><%= t.name %></h3>
-          <p>カテゴリー: <%= t.category %></p>
-        </div>
-
-        <!-- いいねボタン -->
-        <div class="like-section">
-          <% if user_signed_in? %>
-            <% like = t.likes.find_by(user: current_user) %>
+        <!-- いいねボタンのみ -->
+        <% if user_signed_in? %>
+          <% like = t.likes.find_by(user: current_user) %>
+          <div class="like-section">
             <% if like %>
-              <%= button_to "いいねを取り消す", trade_like_path(t, like), method: :delete, class: "like-button" %>
+              <%= button_to "👍を削除", trade_like_path(t, like),
+                            method: :delete,
+                            class: "like-button cancel" %>
             <% else %>
-              <%= button_to "いいね", trade_likes_path(t), method: :post, class: "like-button" %>
+              <%= button_to "👍", trade_likes_path(t),
+                            method: :post,
+                            class: "like-button" %>
             <% end %>
-          <% end %>
-          <span class="like-count"><%= t.likes.count %> いいね</span>
-        </div>
+          </div>
+        <% end %>
 
       </div>
     <% end %>

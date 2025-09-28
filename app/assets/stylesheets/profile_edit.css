@@ -1,0 +1,113 @@
+/* ====== ページタイトル ====== */
+.page-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* ====== 外枠カード ====== */
+.profile-edit-wrapper {
+  max-width: 500px;           /* 横幅 */
+  margin: 40px auto;           /* 中央寄せ */
+  padding: 30px 20px;          /* 内側余白 */
+  background-color: #fff;      /* 背景 */
+  border-radius: 10px;         /* 角丸 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 影 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== 入力項目ラッパー ====== */
+.field {
+  width: 90%;
+  margin: 0 auto 15px;        /* 中央寄せ + 下余白 */
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.field input[type="text"],
+.field input[type="file"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.field input[type="text"]:focus,
+.field select:focus,
+.field textarea:focus,
+.field input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* ====== 送信ボタン ====== */
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.actions input[type="submit"] {
+  display: block;
+  width: 90%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ====== エラー表示 ====== */
+.error-messages {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  padding: 10px;
+  margin: 0 auto 20px;
+  border-radius: 6px;
+  width: 90%;
+}
+
+.error-messages h4 {
+  color: #d9534f;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.error-messages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.error-messages li {
+  color: #d9534f;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ====== 共通フォント設定（ページ全体用） ====== */
+body, input, select, textarea, button, h1, h2, h3, h4, h5, h6, p, span, label, .page-title, .profile-edit-wrapper, .field, .actions {
+  font-family: "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Yu Gothic", "YuGothic", sans-serif;
+  color: #333; /* 文字色統一 */
+}

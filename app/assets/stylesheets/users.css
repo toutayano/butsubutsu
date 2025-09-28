@@ -1,17 +1,6 @@
-/* プロフィールカード */
-.profile-card {
-  position: relative; /* 編集ボタンの基準 */
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  border: 1px solid #ccc;
-  padding: 15px;
-  padding-bottom: 60px; /* 編集ボタン分の余白を確保 */
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  max-width: 600px;
-  margin: 0 auto;
-}
+
+
+
 
 .profile-avatar {
   width: 100px;

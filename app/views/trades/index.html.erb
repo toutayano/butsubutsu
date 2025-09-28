@@ -1,50 +1,62 @@
+
 <!-- 投稿一覧タイトル -->
 <h2 class="trades-title">投稿一覧</h2>
+
+<div class="search-area">
+  <%= form_with url: trades_path, method: :get, local: true, html: { class: "search-form" } do %>
+    <div class="field">
+      <%= label_tag :category, "カテゴリーで絞り込む" %>
+      <%= select_tag :category, options_for_select([
+        ["本・雑誌・漫画", "本・雑誌・漫画"], 
+        ["ゲーム・おもちゃ・グッズ", "ゲーム・おもちゃ・グッズ"], 
+        ["ファッション", "ファッション"],
+        ["家具・インテリア", "家具・インテリア"],
+        ["コスメ・美容", "コスメ・美容"],
+        ["アウトドア・釣り・旅行用品", "アウトドア・釣り・旅行用品"],
+        ["ダイエット・健康", "ダイエット・健康"],
+        ["食品・飲料・酒", "食品・飲料・酒"],
+        ["スポーツ", "スポーツ"],
+        ["ハンドメイド・手芸", "ハンドメイド・手芸"],
+        ["キッチン・日用品", "キッチン・日用品"],
+        ["ホビー・楽器・アート", "ホビー・楽器・アート"],
+        ["その他", "その他"]
+      ], params[:category]), include_blank: "選択して下さい", class: "category-select" %>
+    </div>
+    <%= submit_tag "検索", class: "search-button" %>
+  <% end %>
+</div>
 
 <!-- 投稿一覧グリッド -->
 <div class="trades-container" data-controller="card-click">
   <% @trades.each do |t| %>
     <div class="trade-card" data-href="<%= trade_path(t) %>">
 
-      <!-- 投稿者アイコンと商品画像を横並び -->
-      <div class="card-top" style="display: flex; align-items: center; gap: 10px;">
-
-        <!-- 投稿者アイコン -->
-        <div class="author-info">
-          <%= link_to user_path(t.user), class: "profile-icon" do %>
-            <% if t.user.avatar.attached? %>
-              <%= image_tag t.user.avatar, class: "author-avatar" %>
-            <% else %>
-              <%= image_tag "default_avatar.png", class: "author-avatar" %>
-            <% end %>
-          <% end %>
-          <span class="author-nickname"><%= t.user.nickname %></span>
+      <!-- 商品画像（上部） -->
+      <% if t.image.attached? %>
+        <div class="trade-image-wrapper">
+          <%= image_tag t.image, class: "trade-image" %>
         </div>
+      <% else %>
+        <div class="trade-image-wrapper no-image">
+          <%= image_tag "no_image.png", class: "trade-image" %>
+        </div>
+      <% end %>
 
-        <!-- 商品画像 -->
-        <% if t.image.attached? %>
-          <%= image_tag t.image, class: "trade-image-right" %>
-        <% end %>
-      </div>
-
-      <!-- 投稿情報 -->
-      <div class="trade-info">
-        <h3><%= t.name %></h3>
-        <p>カテゴリー: <%= t.category %></p>
-      </div>
-
-      <!-- いいねボタン -->
-      <div class="like-section">
-        <% if user_signed_in? %>
-          <% like = t.likes.find_by(user: current_user) %>
+      <!-- いいねボタンのみ -->
+      <% if user_signed_in? %>
+        <% like = t.likes.find_by(user: current_user) %>
+        <div class="like-section">
           <% if like %>
-            <%= button_to "いいねを取り消す", trade_like_path(t, like), method: :delete, class: "like-button" %>
+            <%= button_to "👍を削除", trade_like_path(t, like),
+                          method: :delete,
+                          class: "like-button cancel" %>
           <% else %>
-            <%= button_to "いいね", trade_likes_path(t), method: :post, class: "like-button" %>
+            <%= button_to "👍", trade_likes_path(t),
+                          method: :post,
+                          class: "like-button" %>
           <% end %>
-        <% end %>
-        <span class="like-count"><%= t.likes.count %> いいね</span>
-      </div>
+        </div>
+      <% end %>
 
     </div>
   <% end %>

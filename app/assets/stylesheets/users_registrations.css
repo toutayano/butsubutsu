@@ -1,0 +1,113 @@
+/* ===== ラッパー全体（カード全体） ===== */
+.registration-wrapper {
+  max-width: 500px; /* ログインページと同じ横幅 */
+  min-height: 500px; /* ログインページと同じ縦幅 */
+  margin: 50px auto; /* 画面中央寄せ */
+  padding: 30px 20px;
+  background-color: #f0f2f5; /* 背景を白 */
+  border-radius: 10px; /* 角丸 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 中身を上下に分ける */
+}
+
+/* ===== ページタイトル ===== */
+.page-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* ===== 各入力項目ラッパー ===== */
+.field {
+  width: 90%;
+  margin: 0 auto 12px;  /* 中央寄せ＋下に少し余白 */
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* ===== ラベル ===== */
+.field label {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px; /* ラベルと入力欄の間隔 */
+  box-sizing: border-box;
+}
+
+/* ===== 入力欄 ===== */
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 12px; /* ログインページに合わせる */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* ===== パスワード注意書き ===== */
+.password-note {
+  font-size: 12px;
+  color: #666;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ===== 登録ボタン ===== */
+.actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.actions input[type="submit"] {
+  display: block;
+  width: 90%;
+  padding: 12px;
+  background-color: #007bff; /* ログインページと統一 */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ===== ログインリンク ===== */
+.login-links {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.login-links a {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  margin: 8px 0;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}

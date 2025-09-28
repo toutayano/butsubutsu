@@ -1,29 +1,55 @@
-/* 親コンテナ：3列グリッド配置（端はぴったりくっつける） */
+/* ===== 投稿一覧グリッド ===== */
 .trades-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 均等3列 */
-  gap: 16px; /* カード間だけ間隔を確保 */
-  width: 100%; /* 横幅いっぱい */
-  margin: 0; /* 左右余白なし */
-  padding: 0; /* 左右余白なし */
+  grid-template-columns: repeat(3, 1fr); /* 常に3列固定 */
+  gap: 8px; /* カード間の余白 */
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
-/* 各カード */
+/* ===== カード ===== */
 .trade-card {
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
+  overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* ホバー時 */
 .trade-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== 商品画像 ===== */
+.trade-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 正方形に統一 */
+  overflow: hidden;
+}
+
+.trade-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .trades-container {
+    gap: 4px;
+    padding: 0 2px;
+  }
+  .trade-card {
+    padding: 4px;
+  }
 }
 
 
@@ -124,24 +150,9 @@
   }
 }
 
-/* ページ全体で中央寄せ */
-.trade-wrapper {
-  display: flex;
-  justify-content: center; /* 水平方向の中央 */
-  align-items: center;     /* 垂直方向の中央 */
-  min-height: 100vh;       /* 画面の高さ全体を使う */
-  background-color: #f0f2f5; /* 背景に薄いグレーをつけるとカードが映える */
-}
 
-.trade-card {
-  max-width: 600px;
-  width: 90%;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background-color: #fff;
-  line-height: 1.6;
-}
+
+
 
 /* 詳細文が長い場合にスクロール可能に */
 .trade-detail {

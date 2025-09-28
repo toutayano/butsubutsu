@@ -1,0 +1,32 @@
+.submit-wrapper {
+  text-align: center; /* ボタンを中央寄せ */
+  margin-top: 16px;   /* 上に余白 */
+}
+
+.submit-button {
+  width: 100%;           /* 幅をラッパーに合わせる */
+  max-width: 100%;       /* 念のため */
+  background-color: #007bff; /* 青 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 24px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* 濃い青 */
+}
+
+.new-trade-form-wrapper {
+  max-width: 550px;  /* 幅を広げる */
+  margin: 0 auto;    /* 中央寄せ */
+  padding: 20px;
+  background-color: #fff; /* 背景を白に */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+

@@ -68,7 +68,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-gem 'dotenv-rails'
+#gem 'dotenv-rails'
 
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
@@ -77,3 +77,5 @@ gem 'activestorage-cloudinary-service'
 group :production do
   gem 'pg'
 end
+
+gem 'pg'

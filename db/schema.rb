@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_02_145930) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_18_163419) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -90,6 +93,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_02_145930) do
   create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user1_id", null: false
+    t.bigint "user2_id", null: false
+    t.bigint "trade_id"
+    t.index ["trade_id"], name: "index_rooms_on_trade_id"
+    t.index ["user1_id"], name: "index_rooms_on_user1_id"
+    t.index ["user2_id"], name: "index_rooms_on_user2_id"
   end
 
   create_table "trade_rooms", force: :cascade do |t|
@@ -138,6 +147,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_02_145930) do
   add_foreign_key "messages", "trades"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "messages"
+  add_foreign_key "rooms", "trades"
   add_foreign_key "trade_rooms", "trades"
   add_foreign_key "trades", "users"
 end

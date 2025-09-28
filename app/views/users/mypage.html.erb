@@ -1,27 +1,30 @@
 <h1 class="page-title">プロフィール</h1>
 
-<!-- プロフィールカード -->
-<div class="profile-card">
-  <!-- プロフィール画像 -->
-  <% if current_user.avatar.attached? %>
-    <%= image_tag current_user.avatar, class: "profile-avatar" %>
-  <% else %>
-    <%= image_tag "default_avatar.png", class: "profile-avatar" %> <!-- デフォルト画像 -->
-  <% end %>
+<div class="profile-slider-container">
+  <div class="profile-slider">
+    
+    <div class="profile-card">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar, class: "profile-avatar" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", class: "profile-avatar" %>
+      <% end %>
 
-  <!-- ユーザー情報 -->
-  <div class="profile-info">
-    <p><strong>ニックネーム:</strong> <%= current_user.nickname %></p>
-    <p><strong>大学:</strong> <%= current_user.university %></p>
-    <p><strong>学部:</strong> <%= current_user.faculty %></p>
-    <p><strong>学科:</strong> <%= current_user.department %></p>
-    <p><strong>学年:</strong> <%= current_user.grade %></p>
-    <p><strong>性別:</strong> <%= current_user.gender %></p>
-  </div>
+      <div class="profile-info">
+        <p><strong>ニックネーム:</strong> <%= current_user.nickname %></p>
+        <p><strong>学年:</strong> <%= current_user.grade %></p>
+        <p><strong>性別:</strong> <%= current_user.gender %></p>
+        <p><strong>学部:</strong> <%= current_user.faculty %></p>
+        <p><strong>大学:</strong> <%= current_user.university %></p>
+        <p><strong>学科:</strong> <%= current_user.department %></p>
+      </div>
 
-  <!-- 編集ボタン -->
-  <div class="edit-button-container">
-    <%= link_to "プロフィールを編集", edit_profile_path, class: "edit-profile-button" %>
+      <div class="edit-button-container">
+        <%= link_to "プロフィールを編集", edit_profile_path, class: "edit-profile-button" %>
+      </div>
+    </div>
+
+    
   </div>
 </div>
   
@@ -34,46 +37,50 @@
     <div class="trade-card" data-href="<%= trade_path(t) %>">
       
       <% if t.image.attached? %>
-        <%= image_tag t.image, size: '250x200', class: "trade-image" %>
+        <div class="trade-image-wrapper">
+          <%= image_tag t.image, class: "trade-image" %>
+        </div>
       <% end %>
 
-      <div class="trade-info">
-        <h3><%= t.name %></h3>
-        <p>カテゴリー: <%= t.category %></p>
-        <span>いいね数: <%= t.likes.count %></span>
-      </div>
+      <!-- 商品名・いいね数は削除 -->
     </div>
   <% end %>
 </div>
 
 <h2 class="page-title">いいねした投稿</h2>
+
+<!-- 投稿一覧グリッドと同じ構造に揃える -->
 <div class="trades-container" data-controller="card-click">
   <% @liked_trades.each do |t| %>
     <div class="trade-card" data-href="<%= trade_path(t) %>">
 
-      <!-- 投稿者アイコン -->
-      <div class="author-info">
-        <%= link_to user_path(t.user), class: "profile-icon" do %>
-          <% if t.user.avatar.attached? %>
-            <%= image_tag t.user.avatar, class: "author-avatar" %>
-          <% else %>
-            <%= image_tag "default_avatar.png", class: "author-avatar" %>
-          <% end %>
-        <% end %>
-        <span class="author-nickname"><%= t.user.nickname %></span>
-      </div>
-
-      <!-- 商品画像 -->
+      <!-- 商品画像（上部） -->
       <% if t.image.attached? %>
-        <%= image_tag t.image, size: '250x200', class: "trade-image" %>
+        <div class="trade-image-wrapper">
+          <%= image_tag t.image, class: "trade-image" %>
+        </div>
+      <% else %>
+        <div class="trade-image-wrapper no-image">
+          <%= image_tag "no_image.png", class: "trade-image" %>
+        </div>
       <% end %>
 
-      <!-- 投稿情報 -->
-      <div class="trade-info">
-        <h3><%= t.name %></h3>
-        <p>カテゴリー: <%= t.category %></p>
-        <span>いいね数: <%= t.likes.count %></span>
-      </div>
+      <!-- いいねボタンのみ -->
+      <% if user_signed_in? %>
+        <% like = t.likes.find_by(user: current_user) %>
+        <div class="like-section">
+          <% if like %>
+            <%= button_to "👍を削除", trade_like_path(t, like),
+                          method: :delete,
+                          class: "like-button cancel" %>
+          <% else %>
+            <%= button_to "👍", trade_likes_path(t),
+                          method: :post,
+                          class: "like-button" %>
+          <% end %>
+        </div>
+      <% end %>
+
     </div>
   <% end %>
 </div>

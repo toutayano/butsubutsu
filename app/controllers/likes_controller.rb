@@ -24,35 +24,51 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = Like.find_by(trade_id: params[:trade_id], user_id: current_user.id)
-    @like.destroy if @like
-    redirect_back(fallback_location: root_path, notice: "いいねを取り消しました")
+    @like = current_user.likes.find(params[:id])
+    @like.destroy
+    redirect_back(fallback_location: root_path, notice: "いいねを削除しました")
   end
 
   private
 
   def check_matching(trade, user)
-    # 投稿者が user の投稿に既にいいねしているか
-    other_like = Like.find_by(user: trade.user, trade: user.trades)
-    if other_like
-      # --- マッチング成立 ---
-      room = Room.create!
-      
-      # 両者の Entry を作成
-      [user, trade.user].each do |u|
-        Entry.create!(user: u, room: room)
-      end
+  Rails.logger.info "=== check_matching CALLED ==="
+  Rails.logger.info "trade.user.id: #{trade.user.id}, user.id: #{user.id}"
 
-      # マッチング通知を作成（双方）
-      [user, trade.user].each do |recipient|
-        Notification.create!(
-          recipient: recipient,
-          actor: (recipient == user ? trade.user : user),
-          action: "match",
-          trade: trade,
-          room: room
-        )
-      end
-    end
+  # 投稿者が自分の投稿にいいねしているか確認
+  mutual_like_exists = Like.joins(:trade)
+                           .where(user: trade.user, trades: { user_id: user.id })
+                           .exists?
+
+  Rails.logger.info "mutual_like_exists: #{mutual_like_exists}"
+  return unless mutual_like_exists
+
+  # 二重実行防止フラグ
+  @matching_checked ||= {}
+  room_key = [trade.user.id, user.id].sort.join("-")
+  return if @matching_checked[room_key]
+  @matching_checked[room_key] = true
+
+  Rails.logger.info "=== MATCH FOUND! Room will be created ==="
+
+  # Room の作成（ID順で固定）
+  user1, user2 = [user, trade.user].sort_by(&:id)
+  room = Room.find_or_create_by(user1: user1, user2: user2)
+  Rails.logger.info "Room ID: #{room.id}"
+
+  # 双方に通知（room_idを必ず保存）
+  [user, trade.user].each do |recipient|
+    actor = (recipient == user) ? trade.user : user
+    Rails.logger.info "Creating match notification for recipient_id=#{recipient.id}, actor_id=#{actor.id}"
+
+    Notification.where(recipient: recipient, actor: actor, action: "match").delete_all
+
+    Notification.create!(
+      recipient: recipient,
+      actor: actor,
+      action: "match",
+      room: room  # ← ここで必ずroom_idを保存
+    )
+  end
   end
 end

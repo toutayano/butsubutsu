@@ -59,3 +59,177 @@
 .message-form input[type="submit"]:hover {
   background-color: #357ab8;
 }
+
+
+
+
+.trade-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== 詳細ページカード ===== */
+.trade-card-detail {
+  width: 95%;             /* 画面幅の90%を使用 */
+  max-width: 600px;       /* 最大幅は600pxに制限 */
+  margin: 40px auto;      /* 上下40px、左右中央 */
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;       /* 角丸を画像にも反映 */
+}
+
+/* スマホ用調整（任意） */
+@media (max-width: 480px) {
+  .trade-card-detail {
+    width: 95%;           /* 小さい画面ではさらに余白を少なく */
+    margin: 20px auto;    /* 上下マージンも少なくして画面に収める */
+  }
+}
+
+/* 画像部分はカードのpaddingを除外して枠いっぱいに */
+.trade-image-detail-wrapper {
+  width: 100%;
+}
+
+/* 正方形に表示 */
+.trade-image-detail {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 画像をぴったりに */
+.trade-image-detail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* 画像以外のテキスト部分にだけ余白 */
+.trade-detail-content {
+  line-height: 1.6;
+  padding-left: 15px; /* 左余白を追加 */
+  padding-right: 15px; /* ついでに右にも余白を追加すると整う */
+}
+
+
+.trade-content p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ===== 詳細説明 ===== */
+.trade-detail p {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #555;
+}
+
+/* ===== 編集・削除ボタン横並び ===== */
+.trade-actions {
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr; /* 左ボタン | 真ん中の余白 | 右ボタン */
+  gap: 0; /* gapは使わず中央余白を列として作成 */
+  max-width: 300px; /* 全体の幅を制限 */
+  margin: 20px auto 0; /* 上に余白＋中央寄せ */
+
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between; /* 両端を揃えて配置 */
+  gap: 10px;                       /* ボタン同士の間隔 */
+  width: 100%;                      /* 親要素いっぱいに広げる */
+  max-width: 400px;                 /* 任意で最大幅を設定 */
+  margin: 0 auto 20px;              /* 下に20px余白＋中央寄せ */
+  box-sizing: border-box;
+  padding: 0 10px;                  /* 左右に同じ余白 */
+  padding-top: 15px;                 /* 区切り線とボタンの間にスペース */
+}
+
+/* button_toで生成されるformをリセット */
+.button-wrapper form {
+  flex: 1;             /* flexで均等幅に */
+  margin: 0;           /* form特有の余白をリセット */
+  padding: 0;          /* form特有のpaddingをリセット */
+}
+
+/* button_to内のbutton */
+.button-wrapper form button {
+  width: 100%;          /* ボタンを親幅いっぱいに */
+  background-color: #dc3545;
+  color: #fff;
+  padding: 8px 0;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+.edit-button,
+.delete-button {
+  flex: 1;                           /* 均等幅にする */
+  background-color: #007bff;         /* 青色 */
+  color: #fff;
+  padding: 8px 0;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;               /* 改行を防止 */
+  display: block;                    /* flexの中で幅100%にする */
+  transition: background-color 0.3s; /* ホバー時のアニメーション */
+}
+
+
+
+
+
+.delete-button {
+  background-color: #dc3545; /* 赤色 */
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: #b52d3a;
+}
+
+
+/* 投稿者情報 */
+.trade-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.author-nickname {
+  font-weight: bold;
+  font-size: 16px;
+}

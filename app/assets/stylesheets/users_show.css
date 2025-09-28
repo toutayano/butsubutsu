@@ -1,18 +1,59 @@
-.profile-card {
+/* 横スクロール全体 */
+.profile-slider-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 25px 0;
   display: flex;
-  align-items: center;
-  gap: 20px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin: 20px 0;
+  justify-content: center;
+  scrollbar-width: thin;
 }
 
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%; /* 丸型 */
-  object-fit: cover;
-  border: 2px solid #ddd;
+/* スクロールバー非表示（Chrome, Safari） */
+.profile-slider-container::-webkit-scrollbar {
+  display: none;
 }
+
+.profile-slider {
+  display: flex;
+  gap: 25px;
+  padding: 0 25px;
+}
+
+/* ===== プロフィールカード ===== */
+.trade-card {
+  width: 500px;
+  margin: 0 auto; /* 横方向中央寄せ */
+  display: block; /* 念のため明示的にブロック要素に */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* ===== 左側アイコン ===== */
+.profile-avatar {
+  width: 180px;   /* アイコンを大きく */
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ccc;
+  flex-shrink: 0;
+}
+
+/* ===== 中央プロフィール情報（2列レイアウト） ===== */
+.profile-info {
+  display: grid;
+  grid-template-columns: 150px 150px; /* 列幅を少し狭める */
+  gap: 12px 50px;
+  padding-left: 20px; /* アイコンが大きくなった分だけ右に余白を追加 */
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+

@@ -51,15 +51,21 @@
       <%= f.text_area :detail, size: "30x2" %>
     </div>
 
-    <div class="field">
-      <%= f.label :商品画像 %>
+    <!-- 商品画像ラベル削除、現在の画像を表示 -->
+    <div class="field image-field">
       <% if @trade.image.attached? %>
-        <p>現在の画像:</p>
-        <%= image_tag @trade.image, width: 200 %>
+        <div class="current-image-container">
+          <p class="current-image-label">現在の画像</p>
+          <div class="image-preview">
+            <%= image_tag @trade.image, class: "current-image" %>
+          </div>
+        </div>
       <% end %>
-      <%= f.file_field :image %>
+      <%= f.file_field :image, class: "image-upload-field" %>
     </div>
 
-    <%= f.submit "更新する" %>
+    <div class="submit-container">
+      <%= f.submit "更新する", class: "submit-button" %>
+    </div>
   <% end %>
 </div>

@@ -1,0 +1,107 @@
+/* ===== 現在の画像 ===== */
+.current-image-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.current-image-label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+
+
+/* 画像表示エリア（サイズを大きく） */
+.image-preview {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+/* 画像本体 */
+.current-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 枠いっぱいに表示、中央でトリミング */
+  display: block;
+}
+
+/* ファイル選択部分 */
+.image-upload-field {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+
+
+
+
+/* ファイル選択部分 */
+.image-upload-field {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+/* ===== フォーム全体 ===== */
+.new-trade-form-wrapper {
+  max-width: 500px;       /* 入力欄・ボタン共通の最大幅 */
+  margin: 0 auto;         /* 中央寄せ */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* ===== 入力欄 ===== */
+.new-trade-form-wrapper input[type="text"],
+.new-trade-form-wrapper select,
+.new-trade-form-wrapper textarea,
+.new-trade-form-wrapper input[type="file"] {
+  width: 100%;               /* 親要素いっぱい */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;    /* paddingを含めてwidth計算 */
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* ===== 更新ボタン ===== */
+.submit-container {
+  margin-top: 20px;
+}
+
+.submit-button {
+  display: block;
+  width: 90%;            /* 親要素に対して90%の幅 */
+  margin: 0 auto;        /* 自動で左右を均等にして中央寄せ */
+  padding: 12px;
+  background-color: #3490dc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  box-sizing: border-box; /* padding含めて幅を計算 */
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #2779bd;
+}
+

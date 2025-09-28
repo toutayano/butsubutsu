@@ -8,20 +8,36 @@ class TradesController < ApplicationController
 
   # 一覧ページ
   def index
+    session.delete(:from_mypage)
+    # ベースとなる投稿の取得
     if user_signed_in?
       # 自分以外の投稿を取得
-      @trades = Trade.where.not(user_id: current_user.id)
+      trades = Trade.where.not(user_id: current_user.id)
     else
       # ログインしていない場合は全投稿を表示
-      @trades = Trade.all
+      trades = Trade.all
     end
+
+    # カテゴリーで絞り込み（params[:category]があれば）
+    if params[:category].present?
+      trades = trades.where(category: params[:category])
+    end
+
+    @trades = trades
   end
+
 
   # 詳細ページ
   def show
   # set_trade で @trade は取得済み
   # 投稿に紐づくコメントを取得（N+1対策として user も一緒に読み込む）
   @messages = @trade.messages.includes(:user)
+
+    if request.referer&.include?(mypage_path)
+      session[:from_mypage] = true
+    elsif request.referer&.include?(trades_path)
+      session[:from_mypage] = false
+    end
   end
 
   # 新規投稿フォーム
@@ -60,20 +76,20 @@ class TradesController < ApplicationController
     redirect_to mypage_path, notice: "投稿を削除しました"
   end
 
-  private
+
 
   # 投稿取得
   def set_trade
     @trade = Trade.find(params[:id])
   end
-
+  
   # 投稿権限チェック（自分の投稿のみ編集・削除可能）
   def authorize_user!
     unless @trade.user == current_user
       redirect_to trades_path, alert: "権限がありません"
     end
   end
-
+  private
   # ストロングパラメータ
   def trade_params
     params.require(:trade).permit(:name, :image, :category, :condition, :detail).merge(user: current_user)

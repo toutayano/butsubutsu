@@ -1,35 +1,53 @@
 <h1 class="page-title">投稿詳細</h1>
 
-<div class="trade-wrapper">
-  <div class="trade-card">
-    <% if @trade.image.attached? %>
-      <div class="trade-image">
-        <%= image_tag @trade.image, width: 300 %>
+
+<div class="trade-card-detail">
+
+  <% if @trade.user != current_user %>
+   <!-- 投稿者が自分以外のときだけ表示 -->
+   <div class="trade-author">
+    <%= link_to user_path(@trade.user), class: "author-link" do %>
+      <% if @trade.user.avatar.attached? %>
+        <%= image_tag @trade.user.avatar, class: "author-avatar" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", class: "author-avatar" %>
+      <% end %>
+    <% end %>
+    <span class="author-nickname"><%= @trade.user.nickname %></span>
+   </div>
+  <% end %>
+
+
+  <% if @trade.image.attached? %>
+    <div class="trade-image-detail-wrapper">
+      <div class="trade-image-detail">
+        <%= image_tag @trade.image %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="trade-detail-content">
+    <p><strong>商品名:</strong> <%= @trade.name %></p>
+    <p><strong>カテゴリー:</strong> <%= @trade.category %></p>
+    <p><strong>商品の状態:</strong> <%= @trade.condition %></p>
+
+    <div class="trade-detail">
+      <strong>商品の説明:</strong>
+      <p><%= simple_format(@trade.detail) %></p>
+    </div>
+
+    <p><strong>いいね数:</strong> <%= @trade.likes.count %></p>
+    <p><strong>投稿日:</strong> <%= @trade.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+
+    <% if user_signed_in? && current_user == @trade.user %>
+      <div class="button-wrapper">
+        <%= link_to "投稿を編集", edit_trade_path(@trade), class: "edit-button" %>
+        <%= button_to "投稿を削除", trade_path(@trade), method: :delete, class: "delete-button", data: { confirm: "本当に削除しますか？" } %>
       </div>
     <% end %>
-
-    <div class="trade-content">
-      <p><strong>名前:</strong> <%= @trade.name %></p>
-      <p><strong>カテゴリ:</strong> <%= @trade.category %></p>
-      <p><strong>状態:</strong> <%= @trade.condition %></p>
-
-      <div class="trade-detail">
-        <strong>詳細:</strong>
-        <p><%= simple_format(@trade.detail) %></p>
-      </div>
-
-      <p><strong>いいね数:</strong> <%= @trade.likes.count %></p>
-      <p><strong>作成日:</strong> <%= @trade.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-
-      <% if user_signed_in? && current_user == @trade.user %>
-        <div class="trade-actions">
-          <%= link_to "編集", edit_trade_path(@trade), class: "edit-button" %>
-          <%= button_to "削除", trade_path(@trade), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "delete-button" %>
-        </div>
-      <% end %>
-    </div>
   </div>
 </div>
+
 
 <hr>
 

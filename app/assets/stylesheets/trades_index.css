@@ -1,0 +1,165 @@
+/* ===== 投稿一覧全体 ===== */
+.trades-container {
+  display: flex;
+  flex-wrap: wrap; /* カードを複数行に並べる */
+  gap: 20px;       /* カード間の隙間 */
+  margin-top: 20px;
+  justify-content: space-between; /* 均等配置に変更 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== 各投稿カード ===== */
+.trade-card {
+  width: 370px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  background-color: #fff;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.trade-card:hover {
+  transform: translateY(-5px); /* マウスオーバーで浮く */
+}
+
+/* ===== 商品画像 ===== */
+.trade-image-wrapper {
+  margin: 0;
+  padding: 0;
+  display: block;
+  line-height: 0; /* 画像上下の隙間を消す */
+}
+
+.trade-image {
+  width: 370px;
+  height: 370px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px 8px 0 0;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== アイコン + 商品名 ===== */
+.author-and-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  margin: 0;
+}
+
+/* アイコン */
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* 商品名 */
+.trade-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ===== いいね数 + ボタン ===== */
+.like-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-top: 1px solid #eee; /* 上部に薄い線 */
+  margin: 0;
+}
+
+.like-count {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ===== いいねボタン ===== */
+.like-button {
+  background-color: #f8d7da; /* 薄い赤 */
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  text-align: center;
+}
+
+.like-button:hover {
+  background-color: #f5c6cb;
+  border-color: #f1b0b7;
+}
+
+.like-button:active {
+  background-color: #f1b0b7;
+  border-color: #e89ca2;
+}
+
+/* 親要素：検索エリア全体を中央に配置 */
+.search-area {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* フォーム全体 */
+.search-form {
+  width: 360px;             /* ここで横幅を固定 */
+  display: flex;
+  flex-direction: column;   /* 縦並び */
+  gap: 10px;                /* 各項目の間隔 */
+  box-sizing: border-box;
+}
+
+/* セレクトボックスと検索ボタンを同じ幅に */
+.category-select,
+.search-button {
+  width: 100%;               /* 親（360px）いっぱい */
+  box-sizing: border-box;    /* padding込みで幅を揃える */
+  font-size: 16px;
+}
+
+/* セレクトボックス */
+.category-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* 検索ボタン */
+.search-button {
+  padding: 8px 0;
+  background-color: #007bff; /* 青色 */
+  color: white;              /* 文字色 */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* ホバー時に濃い青 */
+}

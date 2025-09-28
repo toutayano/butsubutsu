@@ -35,20 +35,25 @@
   font-size: 14px;
 }
 
+
+
 /* 送信ボタン */
 .profile-edit-form-wrapper .submit-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+  display: block;            /* ブロック要素にして幅を効かせる */
+  width: 100%;               /* 親要素（フォーム幅）いっぱいに */
+  padding: 12px;             /* 上下左右の余白 */
+  font-size: 16px;           /* フォントサイズ */
+  background-color: #007bff; /* 青色 */
+  color: white;              /* 文字色 */
   border: none;
-  border-radius: 6px;
+  border-radius: 6px;        /* 角丸 */
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+  margin-top: 10px;          /* 上に余白 */
+  box-sizing: border-box;    /* パディング込みで幅を計算 */
+  transition: background-color 0.3s;
 }
 
+/* ホバー時 */
 .profile-edit-form-wrapper .submit-btn:hover {
   background-color: #0056b3;
 }

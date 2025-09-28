@@ -1,20 +1,23 @@
 <h1 class="page-title">パスワードをお忘れの方</h1>
 
 <div class="password-reset-wrapper">
-  
+
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
+    <!-- メールアドレス入力 -->
     <div class="field">
-      <%= f.label :メールアドレス %><br />
+      <%= f.label :メールアドレス %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
+    <!-- 送信ボタン -->
     <div class="actions">
       <%= f.submit "パスワード再設定メールを送信" %>
     </div>
   <% end %>
 
+  <!-- 下部リンク -->
   <div class="login-links">
     <%= render "devise/shared/links" %>
   </div>
